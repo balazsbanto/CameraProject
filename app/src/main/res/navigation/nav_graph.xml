@@ -12,12 +12,20 @@
         android:name="com.blade.cameraproject.HomeFragment"
         android:label="Home"
         tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_home_fragment_to_permissions_fragment"
+            app:destination="@id/permissions_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/permissions_fragment"
         android:name="com.blade.cameraproject.PermissionsFragment"
         android:label="Permissions">
+        <action
+            android:id="@+id/action_permissions_fragment_to_camera_fragment"
+            app:destination="@id/camera_fragment"
+            app:popUpTo="@id/home_fragment"
+            />
     </fragment>
 
     <fragment

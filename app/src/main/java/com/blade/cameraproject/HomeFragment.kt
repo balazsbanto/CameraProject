@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
         //TODO STEP 5 - Set an OnClickListener, using Navigation.createNavigateOnClickListener()
 
         binding.startCameraButton.setOnClickListener {
-            findNavController().navigate(R.id.permissions_fragment, null)
+            findNavController().navigate(R.id.action_home_fragment_to_permissions_fragment)
         }
         //TODO END STEP 5
 

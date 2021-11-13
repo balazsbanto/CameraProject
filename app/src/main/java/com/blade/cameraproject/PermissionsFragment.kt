@@ -23,7 +23,7 @@ class PermissionsFragment : Fragment() {
 
         if (hasPermissions(requireContext())) {
             // If permissions have already been granted, proceed
-            findNavController().navigate(R.id.camera_fragment, null)
+            findNavController().navigate(R.id.action_permissions_fragment_to_camera_fragment)
         } else {
             // Request camera-related permissions
             requestPermissions(PERMISSIONS_REQUIRED, PERMISSIONS_REQUEST_CODE)
