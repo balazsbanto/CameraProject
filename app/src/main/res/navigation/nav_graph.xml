@@ -14,4 +14,16 @@
         tools:layout="@layout/home_fragment">
     </fragment>
 
+    <fragment
+        android:id="@+id/permissions_fragment"
+        android:name="com.blade.cameraproject.PermissionsFragment"
+        android:label="Permissions">
+    </fragment>
+
+    <fragment
+        android:id="@+id/camera_fragment"
+        android:name="com.blade.cameraproject.MyCameraFragment"
+        android:label="Camera">
+    </fragment>
+
 </navigation>

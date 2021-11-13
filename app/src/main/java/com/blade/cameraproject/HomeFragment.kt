@@ -4,24 +4,30 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.blade.cameraproject.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
+
+    lateinit var binding:HomeFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        binding = HomeFragmentBinding.inflate(inflater, container, false)
+//        return inflater.inflate(R.layout.home_fragment, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         //TODO STEP 5 - Set an OnClickListener, using Navigation.createNavigateOnClickListener()
-//        val button = view.findViewById<Button>(R.id.navigate_destination_button)
-//        button?.setOnClickListener {
-//            findNavController().navigate(R.id.flow_step_one_dest, null)
-//        }
+
+        binding.startCameraButton.setOnClickListener {
+            findNavController().navigate(R.id.permissions_fragment, null)
+        }
         //TODO END STEP 5
 
         //TODO STEP 6 - Set NavOptions
