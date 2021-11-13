@@ -32,6 +32,25 @@
         android:id="@+id/camera_fragment"
         android:name="com.blade.cameraproject.MyCameraFragment"
         android:label="Camera">
+        <action
+            android:id="@+id/action_camera_fragment_to_image_viewer_fragment"
+            app:destination="@id/image_viewer_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/image_viewer_fragment"
+        android:name="com.blade.cameraproject.MyImageViewerFragment"
+        android:label="ImageViewer">
+
+        <argument
+            android:name="file_path"
+            app:argType="string"
+            app:nullable="false"/>
+
+        <argument
+            android:name="orientation"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
 </navigation>
