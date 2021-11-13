@@ -34,7 +34,9 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-open class CameraFragment : Fragment() {
+abstract class CameraFragment : Fragment() {
+
+    abstract fun onResult(result:CaptureResultData)
 
     /** Android ViewBinding */
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
@@ -202,30 +204,32 @@ open class CameraFragment : Fragment() {
         // Listen to the capture button
         fragmentCameraBinding.captureButton.setOnClickListener {
 
-//            // Disable click listener to prevent multiple requests simultaneously in flight
-//            it.isEnabled = false
-//
-//            // Perform I/O heavy operations in a different scope
-//            lifecycleScope.launch(Dispatchers.IO) {
-//                takePhoto().use { result ->
-//                    Log.d(TAG, "Result received: $result")
-//
-//                    // Save the result to disk
-//                    val output = saveResult(result)
-//                    Log.d(TAG, "Image saved: ${output.absolutePath}")
-//
-//                    // If the result is a JPEG file, update EXIF metadata with orientation info
-//                    if (output.extension == "jpg") {
-//                        val exif = ExifInterface(output.absolutePath)
-//                        exif.setAttribute(
-//                            ExifInterface.TAG_ORIENTATION, result.orientation.toString()
-//                        )
-//                        exif.saveAttributes()
-//                        Log.d(TAG, "EXIF metadata saved: ${output.absolutePath}")
-//                    }
-//
-//                    // Display the photo taken to user
-//                    lifecycleScope.launch(Dispatchers.Main) {
+            // Disable click listener to prevent multiple requests simultaneously in flight
+            it.isEnabled = false
+
+            // Perform I/O heavy operations in a different scope
+            lifecycleScope.launch(Dispatchers.IO) {
+                takePhoto().use { result ->
+                    Log.d(TAG, "Result received: $result")
+
+                    // Save the result to disk
+                    val output = saveResult(result)
+                    Log.d(TAG, "Image saved: ${output.absolutePath}")
+
+                    // If the result is a JPEG file, update EXIF metadata with orientation info
+                    if (output.extension == "jpg") {
+                        val exif = ExifInterface(output.absolutePath)
+                        exif.setAttribute(
+                            ExifInterface.TAG_ORIENTATION, result.orientation.toString()
+                        )
+                        exif.saveAttributes()
+                        Log.d(TAG, "EXIF metadata saved: ${output.absolutePath}")
+                    }
+
+                    // Display the photo taken to user
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        onResult(CaptureResultData(filePath = output.absolutePath,
+                        orientation = result.orientation))
 //                        navController.navigate(
 //                            CameraFragmentDirections
 //                                .actionCameraToJpegViewer(output.absolutePath)
@@ -235,12 +239,12 @@ open class CameraFragment : Fragment() {
 //                                            result.format == ImageFormat.DEPTH_JPEG
 //                                )
 //                        )
-//                    }
-//                }
-//
-//                // Re-enable click listener after photo is taken
-//                it.post { it.isEnabled = true }
-//            }
+                    }
+                }
+
+                // Re-enable click listener after photo is taken
+                it.post { it.isEnabled = true }
+            }
         }
     }
 
