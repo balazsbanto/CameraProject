@@ -44,27 +44,16 @@ abstract class CameraFragment : Fragment() {
 
     private val fragmentCameraBinding get() = _fragmentCameraBinding!!
 
-//    /** AndroidX navigation arguments */
-//    private val args: CameraFragmentArgs by navArgs()
-    private val cameraData: CameraUtils.FormatItem by lazy {
-    CameraUtils.getBackJpgCamera(cameraManager)
-    }
 
-//    /** Host's navigation controller */
-//    private val navController: NavController by lazy {
-//        Navigation.findNavController(requireActivity(), R.id.fragment_container)
-//    }
+    private val cameraData: CameraUtils.FormatItem by lazy {
+        CameraUtils.getBackJpgCamera(cameraManager)
+    }
 
     /** Detects, characterizes, and connects to a CameraDevice (used for all camera operations) */
     private val cameraManager: CameraManager by lazy {
         val context = requireContext().applicationContext
         context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     }
-
-//    /** [CameraCharacteristics] corresponding to the provided Camera ID */
-//    private val characteristics: CameraCharacteristics by lazy {
-//        cameraManager.getCameraCharacteristics(args.cameraId)
-//    }
 
     private val characteristics: CameraCharacteristics by lazy {
         cameraManager.getCameraCharacteristics(cameraData.cameraId)
@@ -230,18 +219,11 @@ abstract class CameraFragment : Fragment() {
                     // Display the photo taken to user
                     lifecycleScope.launch(Dispatchers.Main) {
                         onResult(
-                            CaptureResultData(filePath = output.absolutePath,
-                        orientation = result.orientation)
+                            CaptureResultData(
+                                filePath = output.absolutePath,
+                                orientation = result.orientation
+                            )
                         )
-//                        navController.navigate(
-//                            CameraFragmentDirections
-//                                .actionCameraToJpegViewer(output.absolutePath)
-//                                .setOrientation(result.orientation)
-//                                .setDepth(
-//                                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q &&
-//                                            result.format == ImageFormat.DEPTH_JPEG
-//                                )
-//                        )
                     }
                 }
 

@@ -24,10 +24,7 @@ import kotlin.math.max
 
 abstract class ImageViewerFragment : Fragment() {
 
-    lateinit var binding:FragmentImageViewerBinding
-
-    /** AndroidX navigation arguments */
-//    private val args: ImageViewerFragmentArgs by navArgs()
+    lateinit var binding: FragmentImageViewerBinding
 
     /** Default Bitmap decoding options */
     private val bitmapOptions = BitmapFactory.Options().apply {
@@ -43,14 +40,6 @@ abstract class ImageViewerFragment : Fragment() {
     /** Bitmap transformation derived from passed arguments */
     private val bitmapTransformation: Matrix by lazy { decodeExifOrientation(orientation) }
 
-
-    /** Data backing our Bitmap viewpager */
-    private val bitmapList: MutableList<Bitmap> = mutableListOf()
-
-    private fun imageViewFactory() = ImageView(requireContext()).apply {
-        layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,18 +48,6 @@ abstract class ImageViewerFragment : Fragment() {
         binding = FragmentImageViewerBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-
-//    = ViewPager2(requireContext()).apply {
-//        // Populate the ViewPager and implement a cache of two media items
-//        offscreenPageLimit = 2
-//        adapter = GenericListAdapter(
-//            bitmapList,
-//            itemViewFactory = { imageViewFactory() }) { view, item, _ ->
-//            view as ImageView
-//            Glide.with(view).load(item).into(view)
-//        }
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -86,9 +63,6 @@ abstract class ImageViewerFragment : Fragment() {
                     .load(decodeBitmap(inputBuffer, 0, inputBuffer.size))
                     .into(binding.imageViewer)
             }
-
-//            addItemToViewPager(view, decodeBitmap(inputBuffer, 0, inputBuffer.size))
-
         }
     }
 
@@ -111,38 +85,18 @@ abstract class ImageViewerFragment : Fragment() {
 
         // Transform bitmap orientation using provided metadata
         return Bitmap.createBitmap(
-            bitmap, 0, 0, bitmap.width, bitmap.height, bitmapTransformation, true)
+            bitmap, 0, 0, bitmap.width, bitmap.height, bitmapTransformation, true
+        )
     }
 
     companion object {
         private val TAG = ImageViewerFragment::class.java.simpleName
-        private const val ARG_FILEPATH = "arg_filepath"
-        private const val ARG_ORIENTATION = "arg_orientation"
-
-//        @JvmStatic
-//        fun newInstance(filePath: String, orientation:Int) = ImageViewerFragment().apply {
-//            arguments = Bundle().apply {
-//                putString(ARG_FILEPATH, filePath)
-//                putInt(ARG_ORIENTATION, orientation)
-//            }
-//        }
 
         /** Maximum size of [Bitmap] decoded */
         private const val DOWNSAMPLE_SIZE: Int = 1024  // 1MP
 
     }
 
-    abstract var filePath:String
-    abstract var orientation:Int
-
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        arguments?.getString(ARG_FILEPATH)?.let {
-//            filePath = it
-//        }
-//
-//        arguments?.getInt(ARG_ORIENTATION)?.let {
-//            orientation = it
-//        }
-//    }
+    abstract var filePath: String
+    abstract var orientation: Int
 }
