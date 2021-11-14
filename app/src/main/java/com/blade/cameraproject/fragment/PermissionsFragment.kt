@@ -1,4 +1,4 @@
-package com.blade.cameraproject
+package com.blade.cameraproject.fragment
 
 import android.Manifest
 import android.content.Context
@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.blade.cameraproject.R
 
 private const val PERMISSIONS_REQUEST_CODE = 10
 private val PERMISSIONS_REQUIRED = arrayOf(Manifest.permission.CAMERA)

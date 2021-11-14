@@ -1,4 +1,4 @@
-package com.blade.cameralib
+package com.blade.cameralib.fragment
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -27,6 +27,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.blade.cameralib.utils.*
 import kotlinx.coroutines.launch
 import java.util.concurrent.ArrayBlockingQueue
 import java.util.concurrent.TimeoutException
@@ -36,7 +37,7 @@ import kotlin.coroutines.suspendCoroutine
 
 abstract class CameraFragment : Fragment() {
 
-    abstract fun onResult(result:CaptureResultData)
+    abstract fun onResult(result: CaptureResultData)
 
     /** Android ViewBinding */
     private var _fragmentCameraBinding: FragmentCameraBinding? = null
@@ -45,8 +46,8 @@ abstract class CameraFragment : Fragment() {
 
 //    /** AndroidX navigation arguments */
 //    private val args: CameraFragmentArgs by navArgs()
-    private val cameraData:CameraUtils.FormatItem by lazy {
-        CameraUtils.getBackJpgCamera(cameraManager)
+    private val cameraData: CameraUtils.FormatItem by lazy {
+    CameraUtils.getBackJpgCamera(cameraManager)
     }
 
 //    /** Host's navigation controller */
@@ -228,8 +229,10 @@ abstract class CameraFragment : Fragment() {
 
                     // Display the photo taken to user
                     lifecycleScope.launch(Dispatchers.Main) {
-                        onResult(CaptureResultData(filePath = output.absolutePath,
-                        orientation = result.orientation))
+                        onResult(
+                            CaptureResultData(filePath = output.absolutePath,
+                        orientation = result.orientation)
+                        )
 //                        navController.navigate(
 //                            CameraFragmentDirections
 //                                .actionCameraToJpegViewer(output.absolutePath)

@@ -1,4 +1,4 @@
-package com.blade.cameralib
+package com.blade.cameralib.utils
 
 import android.annotation.SuppressLint
 import android.graphics.ImageFormat

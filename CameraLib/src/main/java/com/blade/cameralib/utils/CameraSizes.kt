@@ -1,4 +1,4 @@
-package com.blade.cameralib
+package com.blade.cameralib.utils
 
 import android.graphics.Point
 import android.hardware.camera2.CameraCharacteristics

@@ -1,10 +1,10 @@
-package com.blade.cameraproject
+package com.blade.cameraproject.fragment
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.blade.cameraproject.R
 import com.blade.cameraproject.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
