@@ -53,3 +53,7 @@ app/beefie/
 
 # Cmake build
 */.cxx
+
+#opencv related:
+CameraLib/src/main/jniLibs/
+sdk/

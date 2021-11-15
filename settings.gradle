@@ -10,3 +10,4 @@ dependencyResolutionManagement {
 rootProject.name = "CameraProject"
 include ':app'
 include ':CameraLib'
+include ':sdk'

@@ -36,6 +36,15 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 abstract class CameraFragment : Fragment() {
+    override fun onResume() {
+//        fragmentCameraBinding.viewFinder.onResume()
+        super.onResume()
+    }
+
+    override fun onPause() {
+//        fragmentCameraBinding.viewFinder.onPause()
+        super.onPause()
+    }
 
     abstract fun onResult(result: CaptureResultData)
 

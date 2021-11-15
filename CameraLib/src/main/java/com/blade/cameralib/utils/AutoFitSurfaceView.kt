@@ -1,9 +1,12 @@
 package com.blade.cameralib.utils
 
 import android.content.Context
+import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.SurfaceView
+import android.view.View
+import org.opencv.android.CameraGLSurfaceView
 import kotlin.math.roundToInt
 
 /**
@@ -34,8 +37,8 @@ class AutoFitSurfaceView @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        val width = MeasureSpec.getSize(widthMeasureSpec)
-        val height = MeasureSpec.getSize(heightMeasureSpec)
+        val width = View.MeasureSpec.getSize(widthMeasureSpec)
+        val height = View.MeasureSpec.getSize(heightMeasureSpec)
         if (aspectRatio == 0f) {
             setMeasuredDimension(width, height)
         } else {
